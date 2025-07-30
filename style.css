@@ -1,0 +1,20 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background: #f4f4f4;
+}
+textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+}
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+}
+#messages div, #pending-messages div, #published-messages div {
+    background: white;
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 5px solid #ccc;
+}

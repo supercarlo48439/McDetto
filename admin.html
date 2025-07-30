@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - SfogaMic</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <h1>Area Admin - SfogaMic</h1>
+    <input type="password" id="admin-password" placeholder="Inserisci password">
+    <button onclick="checkPassword()">Accedi</button>
+    <div id="admin-panel" style="display:none;">
+        <h2>Commenti in attesa</h2>
+        <div id="pending-messages"></div>
+        <h2>Commenti pubblicati</h2>
+        <div id="published-messages"></div>
+    </div>
+    <script>
+        const ADMIN_PASSWORD = "carlo123@A";
+        function checkPassword() {
+            const input = document.getElementById("admin-password").value;
+            if (input === ADMIN_PASSWORD) {
+                document.getElementById("admin-panel").style.display = "block";
+            } else {
+                alert("Password errata");
+            }
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
