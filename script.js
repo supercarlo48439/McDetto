@@ -102,8 +102,11 @@ async function loadPublicComments() {
         container.appendChild(div);
     });
 }
-
 window.onload = () => {
-    loadAdminComments();
-    loadPublicComments();
+    if (document.getElementById("pending-messages")) {
+        loadAdminComments();
+    }
+    if (document.getElementById("messages")) {
+        loadPublicComments();
+    }
 };
