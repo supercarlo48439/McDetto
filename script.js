@@ -52,7 +52,8 @@ async function loadAdminComments() {
             const approveBtn = document.createElement("button");
             approveBtn.textContent = "Approva";
             approveBtn.onclick = async () => {
-                await db.collection("comments").doc(doc.id).update({ approved: true });
+                await db.collection("comments").doc(doc.id).update({ approved: true,
+                reported: false });
                 loadAdminComments();
             };
             const deleteBtn = document.createElement("button");
