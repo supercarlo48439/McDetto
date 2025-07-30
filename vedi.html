@@ -20,7 +20,6 @@
     <div id="comments">Caricamento...</div>
 
     <script>
-        // Config Firebase (stessa cosa del tuo script.js)
         const firebaseConfig = {
           apiKey: "AIzaSyBWvmJMdhIj6Q-KQhngTHLhkiiOW4bY_QU",
           authDomain: "mcdetto-b1264.firebaseapp.com",
@@ -30,6 +29,7 @@
           appId: "1:562034060696:web:bcbe0e9897c5bef2334fed",
           measurementId: "G-CPEJSTMQ4L"
         };
+
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
@@ -54,9 +54,10 @@
                     div.textContent = data.text;
                     container.appendChild(div);
                 });
-            } catch (e) {
+            } catch (error) {
                 container.innerHTML = "Errore nel caricamento.";
-                console.error(e);
+                console.error("Errore Firestore:", error);
+                alert("Errore Firestore: " + error.message);
             }
         }
 
