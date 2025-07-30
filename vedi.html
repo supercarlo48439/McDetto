@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <title>Commenti Approvati - SfogaMic</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; background: #f4f4f4; }
+        #comments div {
+            background: white;
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 5px solid green;
+        }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <h1>Commenti Approvati</h1>
+    <div id="comments">Caricamento...</div>
+
+    <script>
+        // Config Firebase (stessa cosa del tuo script.js)
+        const firebaseConfig = {
+          apiKey: "AIzaSyBWvmJMdhIj6Q-KQhngTHLhkiiOW4bY_QU",
+          authDomain: "mcdetto-b1264.firebaseapp.com",
+          projectId: "mcdetto-b1264",
+          storageBucket: "mcdetto-b1264.firebasestorage.app",
+          messagingSenderId: "562034060696",
+          appId: "1:562034060696:web:bcbe0e9897c5bef2334fed",
+          measurementId: "G-CPEJSTMQ4L"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        async function loadApprovedComments() {
+            const container = document.getElementById("comments");
+            container.innerHTML = "Caricamento commenti...";
+            try {
+                const snapshot = await db.collection("comments")
+                    .where("approved", "==", true)
+                    .orderBy("timestamp", "desc")
+                    .get();
+
+                if (snapshot.empty) {
+                    container.innerHTML = "Nessun commento approvato.";
+                    return;
+                }
+
+                container.innerHTML = "";
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const div = document.createElement("div");
+                    div.textContent = data.text;
+                    container.appendChild(div);
+                });
+            } catch (e) {
+                container.innerHTML = "Errore nel caricamento.";
+                console.error(e);
+            }
+        }
+
+        window.onload = loadApprovedComments;
+    </script>
+</body>
+</html>
